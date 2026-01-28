@@ -132,3 +132,5 @@ dist/
 out/
 
 extra's/
+.claude/
+.qodo/
