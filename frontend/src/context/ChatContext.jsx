@@ -50,14 +50,30 @@ export const ChatProvider = ({ children }) => {
     if (!activeConversation) {
       throw new Error('No active conversation');
     }
+    
+    // Optimistic update: Show user message immediately
+    const tempUserMessage = {
+      id: `temp-${Date.now()}`,
+      role: 'user',
+      content,
+      created_at: new Date().toISOString(),
+      isOptimistic: true,
+    };
+    setMessages((prev) => [...prev, tempUserMessage]);
+    
     setSending(true);
     try {
       const response = await chatService.sendMessage(activeConversation.id, {
         content,
       });
+      // Fetch updated messages (includes both user message and AI response)
       const updated = await conversationService.getMessages(activeConversation.id);
       setMessages(updated);
       return response;
+    } catch (error) {
+      // Remove optimistic message on error
+      setMessages((prev) => prev.filter(m => m.id !== tempUserMessage.id));
+      throw error;
     } finally {
       setSending(false);
     }

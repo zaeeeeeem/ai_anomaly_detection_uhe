@@ -1,6 +1,8 @@
 import json
 import logging
 import re
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
 import google.generativeai as genai
 from typing import List, Dict, Any
 from app.config import settings
@@ -9,6 +11,9 @@ logger = logging.getLogger("pipeline")
 
 # Configure Gemini
 genai.configure(api_key=settings.GEMINI_API_KEY)
+
+# Thread pool for running synchronous Gemini calls without blocking event loop
+_executor = ThreadPoolExecutor(max_workers=4)
 
 
 class GeminiService:
@@ -67,8 +72,13 @@ class GeminiService:
 
             full_prompt = f"{system_prompt}\n\n{full_prompt}"
 
-            # Generate response
-            response = model.generate_content(full_prompt)
+            # Generate response using thread pool to avoid blocking the async event loop
+            # The Gemini SDK's generate_content is synchronous, so we run it in a thread
+            loop = asyncio.get_event_loop()
+            response = await loop.run_in_executor(
+                _executor,
+                lambda: model.generate_content(full_prompt)
+            )
 
             return response.text
 
@@ -165,8 +175,14 @@ class GeminiService:
             logger.info("Gemini JSON response bytes=%s", len(response.text))
             return _extract_json(response.text)
 
+        # Run synchronous Gemini call in thread pool to avoid blocking event loop
+        loop = asyncio.get_event_loop()
+        
         try:
-            return _run_request(model_name or settings.GEMINI_JSON_MODEL)
+            return await loop.run_in_executor(
+                _executor,
+                lambda: _run_request(model_name or settings.GEMINI_JSON_MODEL)
+            )
         except json.JSONDecodeError as exc:
             logger.exception("Gemini JSON parse error")
             raise Exception(f"Gemini JSON parse error: {str(exc)}") from exc
@@ -175,7 +191,10 @@ class GeminiService:
             if "is not found" in message or "not supported for generateContent" in message:
                 fallback = "gemini-2.5-flash-lite"
                 logger.warning("Gemini JSON model failed, retrying with %s", fallback)
-                return _run_request(fallback)
+                return await loop.run_in_executor(
+                    _executor,
+                    lambda: _run_request(fallback)
+                )
             logger.exception("Gemini JSON error")
             raise Exception(f"Gemini JSON error: {message}") from exc
 

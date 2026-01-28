@@ -66,7 +66,6 @@
   font-size: var(--text-sm);
   line-height: var(--leading-relaxed);
   position: relative;
-  white-space: pre-wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }

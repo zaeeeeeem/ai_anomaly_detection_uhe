@@ -15,6 +15,7 @@ import { AdminCustomerInteractions } from './pages/AdminCustomerInteractions';
 import { AdminFlaggedReview } from './pages/AdminFlaggedReview';
 import { AdminInteractionDetail } from './pages/AdminInteractionDetail';
 import { AdminReviewPage } from './pages/AdminReviewPage';
+import LandingPage from './pages/LandingPage';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
@@ -66,7 +67,7 @@ const RootRedirect = () => {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <LandingPage />;
   }
 
   return user?.role === 'admin' ? (
