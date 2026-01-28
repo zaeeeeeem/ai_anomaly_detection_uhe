@@ -1,0 +1,358 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   FRONTEND DESIGN SYSTEM - MEDICAL AI ANOMALY DETECTION PLATFORM
+   Design Philosophy: Clinical Intelligence (Bloomberg Terminal meets Apple Health)
+   Version: 2.0 Production
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ═══════════════════════════════════════════════
+     BRAND COLORS - Medical Intelligence Theme
+     ═══════════════════════════════════════════════ */
+
+  /* Primary: Deep Teal - Trust, Medical, Professional */
+  --color-primary-50: #f0fdfa;
+  --color-primary-100: #ccfbf1;
+  --color-primary-200: #99f6e4;
+  --color-primary-300: #5eead4;
+  --color-primary-400: #2dd4bf;
+  --color-primary-500: #14b8a6;  /* Main Brand Color */
+  --color-primary-600: #0d9488;
+  --color-primary-700: #0f766e;
+  --color-primary-800: #115e59;
+  --color-primary-900: #134e4a;
+  --color-primary-950: #042f2e;
+
+  /* Secondary: Slate - Neutral Intelligence */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+  /* ═══════════════════════════════════════════════
+     SEMANTIC COLORS - Status & Feedback
+     ═══════════════════════════════════════════════ */
+
+  /* Success - Medical Safe */
+  --color-success-light: #dcfce7;
+  --color-success-main: #22c55e;
+  --color-success-dark: #16a34a;
+  --color-success-text: #15803d;
+
+  /* Warning - Attention Required */
+  --color-warning-light: #fef3c7;
+  --color-warning-main: #f59e0b;
+  --color-warning-dark: #d97706;
+  --color-warning-text: #b45309;
+
+  /* Error/Danger - Critical Alert */
+  --color-danger-light: #fee2e2;
+  --color-danger-main: #ef4444;
+  --color-danger-dark: #dc2626;
+  --color-danger-text: #b91c1c;
+
+  /* Info - Neutral Information */
+  --color-info-light: #dbeafe;
+  --color-info-main: #3b82f6;
+  --color-info-dark: #2563eb;
+  --color-info-text: #1d4ed8;
+
+  /* Flagged - AI Detection Alert (Custom) */
+  --color-flagged-light: #fef2f2;
+  --color-flagged-main: #f87171;
+  --color-flagged-dark: #dc2626;
+  --color-flagged-glow: rgba(239, 68, 68, 0.2);
+
+  /* Safe - AI Verified Safe (Custom) */
+  --color-safe-light: #f0fdf4;
+  --color-safe-main: #4ade80;
+  --color-safe-dark: #22c55e;
+  --color-safe-glow: rgba(34, 197, 94, 0.2);
+
+  /* Borderline - Needs Review (Custom) */
+  --color-borderline-light: #fff7ed;
+  --color-borderline-main: #fb923c;
+  --color-borderline-dark: #ea580c;
+  --color-borderline-glow: rgba(251, 146, 60, 0.2);
+
+  /* ═══════════════════════════════════════════════
+     LEGACY ALIASES - For Backwards Compatibility
+     ═══════════════════════════════════════════════ */
+
+  /* Color Aliases */
+  --color-primary: var(--color-primary-500);
+  --color-primary-dark: var(--color-primary-700);
+  --color-primary-glow: rgba(20, 184, 166, 0.15);
+
+  /* ═══════════════════════════════════════════════
+     BACKGROUNDS - Layered Depth System
+     ═══════════════════════════════════════════════ */
+
+  /* Base Backgrounds */
+  --bg-base: #fafbfc;           /* App background */
+  --bg-primary: #fafbfc;        /* Alias for bg-base */
+  --bg-surface: #ffffff;         /* Cards, panels */
+  --bg-elevated: #ffffff;        /* Modals, dropdowns */
+  --bg-sunken: #f1f5f9;         /* Inset areas */
+  --bg-overlay: rgba(15, 23, 42, 0.6); /* Modal overlays */
+
+  /* Interactive Backgrounds */
+  --bg-hover: rgba(20, 184, 166, 0.04);
+  --bg-active: rgba(20, 184, 166, 0.08);
+  --bg-selected: rgba(20, 184, 166, 0.12);
+
+  /* Gradient Backgrounds */
+  --bg-gradient-hero: linear-gradient(135deg, #f0fdfa 0%, #ffffff 50%, #f8fafc 100%);
+  --bg-gradient-card: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+  --bg-gradient-sidebar: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+
+  /* Subtle Patterns (for visual interest) */
+  --bg-pattern-dots: radial-gradient(circle, #e2e8f0 1px, transparent 1px);
+  --bg-pattern-grid: linear-gradient(#e2e8f0 1px, transparent 1px),
+                     linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
+
+  /* ═══════════════════════════════════════════════
+     TYPOGRAPHY - Professional Medical Theme
+     ═══════════════════════════════════════════════ */
+
+  /* Display Font - Headlines, Hero Text */
+  --font-display: 'Cabinet Grotesk', 'SF Pro Display', -apple-system, sans-serif;
+
+  /* Body Font - All readable content */
+  --font-body: 'Satoshi', 'Inter', 'SF Pro Text', -apple-system, sans-serif;
+
+  /* Mono Font - Code, Data, IDs */
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+
+  /* Data Font - Numbers, Scores, Metrics */
+  --font-data: 'Tabular Nums', 'JetBrains Mono', monospace;
+
+  /* Font Sizes - Modular Scale (1.25 ratio) */
+  --text-2xs: 0.625rem;   /* 10px - Micro labels */
+  --text-xs: 0.75rem;     /* 12px - Captions */
+  --text-sm: 0.875rem;    /* 14px - Small body */
+  --text-base: 1rem;      /* 16px - Body */
+  --text-lg: 1.125rem;    /* 18px - Large body */
+  --text-xl: 1.25rem;     /* 20px - Subheadings */
+  --text-2xl: 1.5rem;     /* 24px - Section titles */
+  --text-3xl: 1.875rem;   /* 30px - Page titles */
+  --text-4xl: 2.25rem;    /* 36px - Hero text */
+  --text-5xl: 3rem;       /* 48px - Display */
+  --text-6xl: 3.75rem;    /* 60px - Large display */
+
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  /* Letter Spacing */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  /* Font Weights */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+
+  /* Text Colors */
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #94a3b8;
+  --color-text-inverse: #ffffff;
+
+  /* ═══════════════════════════════════════════════
+     SPACING - 4px Base Unit System
+     ═══════════════════════════════════════════════ */
+
+  --space-0: 0;
+  --space-px: 1px;
+  --space-0-5: 0.125rem;  /* 2px */
+  --space-1: 0.25rem;     /* 4px */
+  --space-1-5: 0.375rem;  /* 6px */
+  --space-2: 0.5rem;      /* 8px */
+  --space-2-5: 0.625rem;  /* 10px */
+  --space-3: 0.75rem;     /* 12px */
+  --space-3-5: 0.875rem;  /* 14px */
+  --space-4: 1rem;        /* 16px */
+  --space-5: 1.25rem;     /* 20px */
+  --space-6: 1.5rem;      /* 24px */
+  --space-7: 1.75rem;     /* 28px */
+  --space-8: 2rem;        /* 32px */
+  --space-9: 2.25rem;     /* 36px */
+  --space-10: 2.5rem;     /* 40px */
+  --space-11: 2.75rem;    /* 44px */
+  --space-12: 3rem;       /* 48px */
+  --space-14: 3.5rem;     /* 56px */
+  --space-16: 4rem;       /* 64px */
+  --space-20: 5rem;       /* 80px */
+  --space-24: 6rem;       /* 96px */
+  --space-28: 7rem;       /* 112px */
+  --space-32: 8rem;       /* 128px */
+
+  /* ═══════════════════════════════════════════════
+     BORDERS & RADII
+     ═══════════════════════════════════════════════ */
+
+  /* Border Colors */
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
+  --color-border-dark: #cbd5e1;
+
+  /* Border Radii */
+  --radius-none: 0;
+  --radius-sm: 0.25rem;    /* 4px */
+  --radius-md: 0.5rem;     /* 8px */
+  --radius-lg: 0.75rem;    /* 12px */
+  --radius-xl: 1rem;       /* 16px */
+  --radius-2xl: 1.5rem;    /* 24px */
+  --radius-3xl: 2rem;      /* 32px */
+  --radius-full: 9999px;
+
+  /* ═══════════════════════════════════════════════
+     SHADOWS - Elevation System
+     ═══════════════════════════════════════════════ */
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.06), 0 8px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.08), 0 12px 24px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 8px 16px rgba(0, 0, 0, 0.1), 0 20px 48px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 16px 32px rgba(0, 0, 0, 0.12), 0 32px 64px rgba(0, 0, 0, 0.12);
+
+  /* Primary Glow Shadows */
+  --shadow-primary-sm: 0 1px 2px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(20, 184, 166, 0.25);
+  --shadow-primary-md: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 24px rgba(20, 184, 166, 0.35);
+  --shadow-primary-lg: 0 4px 8px rgba(0, 0, 0, 0.12), 0 16px 32px rgba(20, 184, 166, 0.4);
+
+  /* Elevation System - Layered Depth (More Subtle) */
+  --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --elevation-2: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --elevation-3: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --elevation-4: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --elevation-5: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* ═══════════════════════════════════════════════
+     LAYOUT - Container Widths & Dimensions
+     ═══════════════════════════════════════════════ */
+
+  /* Container Widths */
+  --container-xs: 20rem;    /* 320px */
+  --container-sm: 24rem;    /* 384px */
+  --container-md: 28rem;    /* 448px */
+  --container-lg: 32rem;    /* 512px */
+  --container-xl: 36rem;    /* 576px */
+  --container-2xl: 42rem;   /* 672px */
+  --container-3xl: 48rem;   /* 768px */
+  --container-4xl: 56rem;   /* 896px */
+  --container-5xl: 64rem;   /* 1024px */
+  --container-6xl: 72rem;   /* 1152px */
+  --container-7xl: 80rem;   /* 1280px */
+  --container-full: 100%;
+
+  /* Sidebar Widths */
+  --sidebar-collapsed: 72px;
+  --sidebar-expanded: 280px;
+  --sidebar-admin: 260px;
+
+  /* Navbar Heights */
+  --navbar-height: 64px;
+  --navbar-height-mobile: 56px;
+
+  /* ═══════════════════════════════════════════════
+     TRANSITIONS & ANIMATIONS
+     ═══════════════════════════════════════════════ */
+
+  /* Durations */
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 500ms;
+
+  /* Easings */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Standard Transition */
+  --transition-fast: all var(--duration-fast) var(--ease-out);
+  --transition-normal: all var(--duration-normal) var(--ease-in-out);
+  --transition-slow: all var(--duration-slow) var(--ease-in-out);
+
+  /* ═══════════════════════════════════════════════
+     Z-INDEX SCALE
+     ═══════════════════════════════════════════════ */
+
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-fixed: 30;
+  --z-modal-backdrop: 40;
+  --z-modal: 50;
+  --z-popover: 60;
+  --z-tooltip: 70;
+  --z-notification: 80;
+  --z-top: 100;
+}
+
+/* ═══════════════════════════════════════════════
+   DARK MODE - Admin Dashboard Theme
+   ═══════════════════════════════════════════════ */
+
+[data-theme="dark"] {
+  /* Backgrounds */
+  --bg-base: #0a0f1a;
+  --bg-surface: #111827;
+  --bg-elevated: #1f2937;
+  --bg-sunken: #030712;
+  --bg-overlay: rgba(0, 0, 0, 0.7);
+
+  /* Interactive Backgrounds */
+  --bg-hover: rgba(59, 130, 246, 0.1);
+  --bg-active: rgba(59, 130, 246, 0.2);
+  --bg-selected: rgba(59, 130, 246, 0.25);
+
+  /* Text Colors */
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+
+  /* Borders */
+  --color-border: #1e293b;
+  --color-border-light: #334155;
+  --color-border-dark: #475569;
+
+  /* Adjust shadows for dark mode */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.6), 0 12px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ═══════════════════════════════════════════════ */
+
+:root {
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}

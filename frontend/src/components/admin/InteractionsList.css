@@ -1,0 +1,364 @@
+/* ═══════════════════════════════════════════════
+   INTERACTIONS GRID - Modern Design
+   ═══════════════════════════════════════════════ */
+
+.interactions-grid {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 500px), 1fr));
+}
+
+/* ═══════════════════════════════════════════════
+   LOADING STATE
+   ═══════════════════════════════════════════════ */
+
+.interactions-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-12);
+  text-align: center;
+  color: #64748b;
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(20, 184, 166, 0.1);
+  border-top-color: rgba(20, 184, 166, 0.6);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   EMPTY STATE
+   ═══════════════════════════════════════════════ */
+
+.interactions-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-12);
+  text-align: center;
+  background: white;
+  border: 1px dashed #cbd5e1;
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.interactions-empty svg {
+  color: #cbd5e1;
+  margin-bottom: var(--space-2);
+}
+
+.interactions-empty h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: #475569;
+  margin: 0;
+}
+
+.interactions-empty p {
+  font-size: var(--text-sm);
+  color: #64748b;
+  margin: 0;
+  max-width: 400px;
+}
+
+/* ═══════════════════════════════════════════════
+   MODERN INTERACTION CARD
+   ═══════════════════════════════════════════════ */
+
+.interaction-card-modern {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-xl);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  animation: slideInUp 0.4s ease-out;
+  animation-delay: calc(var(--index) * 0.05s);
+  animation-fill-mode: both;
+}
+
+.interaction-card-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(20, 184, 166, 0.6) 50%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.interaction-card-modern:hover {
+  transform: translateY(-4px);
+  border-color: rgba(20, 184, 166, 0.3);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(20, 184, 166, 0.1);
+}
+
+.interaction-card-modern:hover::before {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════
+   CARD TOP - Timestamp & Model
+   ═══════════════════════════════════════════════ */
+
+.interaction-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.interaction-timestamp {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: #64748b;
+}
+
+.interaction-timestamp svg {
+  flex-shrink: 0;
+  opacity: 0.5;
+  color: #94a3b8;
+}
+
+.interaction-time-detail {
+  color: #94a3b8;
+  font-family: var(--font-mono);
+}
+
+.interaction-model-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1-5) var(--space-3);
+  background: rgba(20, 184, 166, 0.08);
+  border: 1px solid rgba(20, 184, 166, 0.2);
+  border-radius: var(--radius-full);
+}
+
+.model-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: var(--font-bold);
+  color: #14b8a6;
+  background: rgba(20, 184, 166, 0.12);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.model-name {
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  color: #475569;
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ═══════════════════════════════════════════════
+   MESSAGES SECTION
+   ═══════════════════════════════════════════════ */
+
+.interaction-messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.message-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-lg);
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.message-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.user-icon {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.assistant-icon {
+  background: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.message-label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.message-content {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: #1e293b;
+}
+
+/* ═══════════════════════════════════════════════
+   CARD FOOTER
+   ═══════════════════════════════════════════════ */
+
+.interaction-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: var(--space-2);
+  margin-top: auto;
+  border-top: 1px solid #e2e8f0;
+}
+
+.view-details-hint {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: #94a3b8;
+  transition: all 0.2s ease;
+}
+
+.view-details-hint svg {
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.2s ease;
+  color: #14b8a6;
+}
+
+.interaction-card-modern:hover .view-details-hint {
+  color: #14b8a6;
+}
+
+.interaction-card-modern:hover .view-details-hint svg {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ═══════════════════════════════════════════════
+   LEGACY SUPPORT (for admin-card class)
+   ═══════════════════════════════════════════════ */
+
+.admin-list {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.admin-card {
+  padding: var(--space-6);
+  background: rgba(30, 41, 59, 0.5);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  color: #cbd5e1;
+  backdrop-filter: blur(8px);
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE DESIGN
+   ═══════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .interactions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .interaction-card-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .interaction-model-badge {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .model-name {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .interaction-card-modern {
+    padding: var(--space-4);
+  }
+
+  .interaction-timestamp {
+    flex-wrap: wrap;
+  }
+
+  .interaction-time-detail {
+    width: 100%;
+    padding-left: 22px;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════ */
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

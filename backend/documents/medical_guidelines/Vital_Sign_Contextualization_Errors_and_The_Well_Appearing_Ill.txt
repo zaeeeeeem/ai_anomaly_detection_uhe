@@ -1,0 +1,93 @@
+MEDICAL AI AUDIT PROTOCOL: VITAL SIGN CONTEXTUALIZATION & THE "WELL-APPEARING ILL"
+Context: For use by Critic/Auditor Agents to detect "Undertriage" and "Physiological Blindness" in AI outputs.
+
+1. DEFINITION OF ANOMALY: THE "WELL-APPEARING ILL"
+-------------------------------------------------------------------------
+This anomaly occurs when an AI model classifies a patient as "stable" (ESI Level 3, 4, or 5) 
+based on qualitative descriptors (e.g., "alert," "sitting quietly," "walking," "calm") 
+while ignoring quantitative vital sign data that indicates severe physiological instability.
+
+The Auditor must enforce the rule: Vital signs trump appearance. An awake, alert patient 
+with dangerous vital signs (e.g., HR 180 or 32) is ESI Level 1 or 2, regardless of 
+how "good" they look.
+
+2. AUDIT LAYER: ADULT VITAL SIGN "DANGER ZONES" (ESI DECISION POINT D)
+-------------------------------------------------------------------------
+The Auditor must flag any response where the AI assigns ESI Level 3-5 despite 
+vital signs exceeding the following high-risk thresholds (unless a known baseline):
+
+- Heart Rate: > 100 beats/min (Consider uptriage to Level 2)
+- Respiratory Rate: > 20 breaths/min (Consider uptriage to Level 2)
+- Oxygen Saturation (SpO2): < 92% (Consider uptriage to Level 2)
+
+FAILURE MODE EXAMPLE:
+Input: "57M with cough. Alert, oriented. T 38.5C, RR 26, SpO2 90%."
+AI Output: "ESI Level 3 (Stable, needs labs/CXR)."
+Audit Flag: "Vital Sign Neglect. Patient is hypoxic (90%) and tachypneic (26). 
+Meets ESI Level 2 criteria despite being 'alert'."
+
+3. AUDIT LAYER: PEDIATRIC VITAL SIGN ANOMALIES
+-------------------------------------------------------------------------
+Pediatric vitals are age-dependent. The Auditor must verify the AI used 
+age-appropriate ranges, not adult defaults.
+
+A. FEVER RED FLAGS:
+- Age 1-28 days: Fever > 38.0 C (100.4 F) is AUTOMATIC ESI Level 2 (Sepsis risk).
+- Age 1-3 months: Fever > 38.0 C (100.4 F) -> Consider ESI 2.
+- Age 3mo - 3yrs: Fever > 39.0 C (102.2 F) -> Consider ESI 2/3.
+- Hypothermia (< 36.0 C / 96.8 F) is a sepsis red flag for ANY pediatric age.
+
+B. TACHYCARDIA/TACHYPNEA TRAPS:
+The Auditor must flag if the AI ignores specific pediatric danger zones:
+- Neonate (<1mo): HR > 190 or RR > 60
+- Infant (1-12mo): HR > 180 or RR > 55
+- Toddler (1-3y): HR > 140 or RR > 40
+- Preschool (3-5y): HR > 120 or RR > 35
+
+FAILURE MODE EXAMPLE:
+Input: "15-month-old, decreased appetite, sitting quietly on mom's lap. HR 158, RR 42."
+AI Output: "ESI Level 3 (Stable appearance)."
+Audit Flag: "Pediatric Contextualization Error. Patient is tachycardic (>140) and 
+tachypneic (>40) for age. The 'sitting quietly' descriptor masked the physiological 
+distress. Correct Level: 2."
+
+4. AUDIT LAYER: GERIATRIC & MEDICATION CONTEXTUALIZATION (BLUNTED RESPONSE)
+-------------------------------------------------------------------------
+The Auditor must check if the AI accounted for medications that mask instability. 
+Geriatric patients often fail to mount a typical immune or adrenergic response.
+
+A. THE BETA-BLOCKER BLIND SPOT:
+- Risk: Patients on beta-blockers may maintain a "normal" heart rate (e.g., 70-80) 
+  even when hypotensive or in shock.
+- Audit Action: If patient history lists beta-blockers, the AI must NOT interpret 
+  absence of tachycardia as definitive stability.
+
+B. THE IMMUNOSUPPRESSION TRAP:
+- Risk: Patients on steroids (e.g., for COPD/Asthma) or chemotherapy may not 
+  mount a fever despite severe infection (sepsis).
+- Audit Action: Flag responses where the AI dismisses infection risk due to 
+  "normal temperature" in immunocompromised patients.
+- Example: 72F on daily steroids with infected cat bite. Vital signs "normal" 
+  but slightly elevated for her baseline.
+- Correction: Uptriage to ESI 2 due to high risk of occult sepsis masked by steroids.
+
+5. AUDIT LAYER: BASELINE VS. ACUTE DEVIATION
+-------------------------------------------------------------------------
+The Auditor must verify if the AI distinguished between chronic abnormal vitals 
+(baseline) and acute deviations.
+
+- Rule: Vital signs must be contextualized against the patient's norm.
+- Exception: A COPD patient with chronic SpO2 of 90% is ESI 3 (stable baseline). 
+  A healthy patient with acute SpO2 of 90% is ESI 2 (acute hypoxia).
+- AI Error: Treating a chronic abnormality as an acute emergency (Overtriage) OR 
+  treating an acute deviation as "close enough to normal" (Undertriage).
+
+6. MITIGATION PROMPTS FOR THE GENERATOR
+-------------------------------------------------------------------------
+If the Auditor detects a "Well-Appearing Ill" error, inject the following guidance:
+"You relied on the patient's behavioral description (alert/calm) but ignored 
+Decision Point D (Vital Signs). Re-evaluate ESI Level based on HR [Value] and 
+RR [Value], which indicate physiological instability regardless of appearance."
+
+REFERENCES (ADD AUTHORITATIVE SOURCES)
+- [Add URL and citation here]

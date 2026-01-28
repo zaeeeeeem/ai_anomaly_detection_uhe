@@ -1,0 +1,24 @@
+Emergency Triage Guidelines
+
+IMMEDIATE (Red): Life-threatening conditions requiring immediate intervention
+- Cardiac arrest
+- Severe respiratory distress
+- Active severe bleeding
+- Altered mental status with airway compromise
+- Severe trauma
+
+URGENT (Yellow): Serious conditions requiring prompt attention within 30 minutes
+- Chest pain suggesting possible cardiac origin
+- Severe pain (8-10/10)
+- High fever with signs of sepsis
+- Moderate to severe bleeding
+
+SEMI-URGENT (Green): Conditions requiring attention within 60-120 minutes
+- Moderate pain (4-7/10)
+- Minor injuries
+- Non-urgent medical conditions
+
+NON-URGENT (White): Minor conditions that can wait
+- Minor cuts/bruises
+- Cold/flu symptoms
+- Prescription refills

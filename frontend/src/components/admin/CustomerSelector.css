@@ -1,0 +1,39 @@
+.customer-selector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.customer-selector label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: #475569;
+}
+
+.customer-selector select {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid #cbd5e1;
+  background: white;
+  font-size: var(--text-base);
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.customer-selector select:hover {
+  border-color: #94a3b8;
+}
+
+.customer-selector select:focus {
+  outline: none;
+  border-color: #14b8a6;
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.customer-selector select option {
+  padding: var(--space-2);
+  color: #1e293b;
+}

@@ -1,0 +1,380 @@
+/* ═══════════════════════════════════════════════
+   CARD SYSTEM - Production Grade
+   ═══════════════════════════════════════════════ */
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+/* ═══════════════════════════════════════════════
+   CARD VARIANTS
+   ═══════════════════════════════════════════════ */
+
+/* Base Card */
+.card-base {
+  /* Default styling */
+}
+
+/* Elevated Card */
+.card-elevated {
+  box-shadow: var(--shadow-sm);
+}
+
+/* Interactive Card */
+.card-interactive {
+  cursor: pointer;
+}
+
+.card-interactive:hover {
+  border-color: var(--color-primary-200);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06), 0 12px 32px rgba(20, 184, 166, 0.08);
+  transform: translateY(-2px);
+}
+
+.card-interactive:active {
+  transform: translateY(0);
+}
+
+/* Flagged Card - AI Detection Alert */
+.card-flagged {
+  border-color: var(--color-flagged-main);
+  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--color-flagged-light) 100%);
+}
+
+.card-flagged::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--color-flagged-main);
+}
+
+/* Safe Card - AI Verified Safe */
+.card-safe {
+  border-color: var(--color-safe-main);
+  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--color-safe-light) 100%);
+}
+
+.card-safe::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--color-safe-main);
+}
+
+/* Borderline Card - Needs Review */
+.card-borderline {
+  border-color: var(--color-borderline-main);
+  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--color-borderline-light) 100%);
+}
+
+.card-borderline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--color-borderline-main);
+}
+
+/* Gradient Card */
+.card-gradient {
+  background: var(--bg-gradient-card);
+  border: 1px solid var(--color-border-light);
+}
+
+/* Dark Card */
+.card-dark {
+  background: var(--color-slate-900);
+  border-color: var(--color-slate-800);
+  color: var(--color-slate-100);
+}
+
+/* ═══════════════════════════════════════════════
+   CARD SECTIONS
+   ═══════════════════════════════════════════════ */
+
+.card-header {
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--color-slate-100);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.card-body {
+  padding: var(--space-6);
+}
+
+.card-footer {
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-slate-50);
+  border-top: 1px solid var(--color-slate-100);
+}
+
+/* ═══════════════════════════════════════════════
+   CARD CONTENT
+   ═══════════════════════════════════════════════ */
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-snug);
+  color: var(--color-slate-900);
+  margin: 0;
+}
+
+.card-description {
+  font-size: var(--text-sm);
+  color: var(--color-slate-600);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   CARD MODIFIERS
+   ═══════════════════════════════════════════════ */
+
+/* No Padding */
+.card-no-padding .card-body {
+  padding: 0;
+}
+
+/* Compact Card */
+.card-compact .card-header,
+.card-compact .card-body,
+.card-compact .card-footer {
+  padding: var(--space-4);
+}
+
+/* Large Card */
+.card-large .card-header,
+.card-large .card-body,
+.card-large .card-footer {
+  padding: var(--space-8);
+}
+
+/* Bordered Header */
+.card-bordered-header .card-header {
+  border-bottom: 2px solid var(--color-slate-200);
+}
+
+/* ═══════════════════════════════════════════════
+   CARD GRID
+   ═══════════════════════════════════════════════ */
+
+.card-grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.card-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.card-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .card-grid-3,
+  .card-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .card-grid-2,
+  .card-grid-3,
+  .card-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   STATS CARD (for metrics/analytics)
+   ═══════════════════════════════════════════════ */
+
+.stats-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, var(--color-primary-100) 0%, transparent 70%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.stats-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-slate-500);
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.stats-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  color: var(--color-slate-900);
+  font-feature-settings: 'tnum';
+  line-height: 1;
+  margin-bottom: var(--space-2);
+}
+
+.stats-change {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+}
+
+.stats-change-up {
+  color: var(--color-success-dark);
+}
+
+.stats-change-down {
+  color: var(--color-danger-dark);
+}
+
+/* ═══════════════════════════════════════════════
+   SCORE CARD (for anomaly scores)
+   ═══════════════════════════════════════════════ */
+
+.score-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+.score-label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-slate-500);
+}
+
+.score-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
+  line-height: 1;
+  font-feature-settings: 'tnum';
+}
+
+.score-value-low {
+  color: var(--color-safe-dark);
+}
+
+.score-value-medium {
+  color: var(--color-warning-dark);
+}
+
+.score-value-high {
+  color: var(--color-danger-dark);
+}
+
+.score-bar {
+  height: 6px;
+  background: var(--color-slate-100);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.score-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.score-bar-fill-low {
+  background: linear-gradient(90deg, var(--color-safe-main) 0%, var(--color-safe-dark) 100%);
+}
+
+.score-bar-fill-medium {
+  background: linear-gradient(90deg, var(--color-warning-main) 0%, var(--color-warning-dark) 100%);
+}
+
+.score-bar-fill-high {
+  background: linear-gradient(90deg, var(--color-danger-main) 0%, var(--color-danger-dark) 100%);
+}
+
+/* ═══════════════════════════════════════════════
+   LOADING CARD (skeleton state)
+   ═══════════════════════════════════════════════ */
+
+.card-loading {
+  pointer-events: none;
+}
+
+.card-loading .card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.card-loading-title {
+  height: 24px;
+  width: 60%;
+  background: var(--color-slate-200);
+  border-radius: var(--radius-md);
+  animation: shimmer 1.5s infinite;
+}
+
+.card-loading-text {
+  height: 16px;
+  width: 100%;
+  background: var(--color-slate-200);
+  border-radius: var(--radius-md);
+  animation: shimmer 1.5s infinite;
+}
+
+.card-loading-text:nth-child(2) {
+  width: 80%;
+}
+
+.card-loading-text:nth-child(3) {
+  width: 90%;
+}

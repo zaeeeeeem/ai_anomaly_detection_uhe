@@ -1,0 +1,12 @@
+.conversation-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.conversation-empty {
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+}

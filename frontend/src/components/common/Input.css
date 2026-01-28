@@ -1,0 +1,365 @@
+/* ═══════════════════════════════════════════════
+   INPUT SYSTEM - Production Grade
+   ═══════════════════════════════════════════════ */
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: auto;
+}
+
+.input-group-full {
+  width: 100%;
+}
+
+/* ═══════════════════════════════════════════════
+   LABEL
+   ═══════════════════════════════════════════════ */
+
+.input-label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-slate-700);
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+.input-label-required::after {
+  content: '*';
+  color: var(--color-danger-main);
+  margin-left: var(--space-1);
+}
+
+/* ═══════════════════════════════════════════════
+   INPUT WRAPPER
+   ═══════════════════════════════════════════════ */
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* ═══════════════════════════════════════════════
+   INPUT BASE
+   ═══════════════════════════════════════════════ */
+
+.input {
+  /* Base */
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+
+  /* Typography */
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-slate-900);
+  line-height: var(--leading-normal);
+
+  /* Shape */
+  background: var(--bg-surface);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-lg);
+
+  /* Transition */
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--color-slate-400);
+}
+
+.input:hover {
+  border-color: var(--color-slate-300);
+}
+
+.input:focus {
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.12);
+  transform: scale(1.005);
+}
+
+.input:disabled {
+  background: var(--color-slate-50);
+  color: var(--color-slate-400);
+  cursor: not-allowed;
+  border-color: var(--color-slate-200);
+}
+
+/* ═══════════════════════════════════════════════
+   INPUT WITH ICON
+   ═══════════════════════════════════════════════ */
+
+.input-with-icon.input-icon-left .input {
+  padding-left: var(--space-10);
+}
+
+.input-with-icon.input-icon-right .input {
+  padding-right: var(--space-10);
+}
+
+.input-icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-slate-400);
+  pointer-events: none;
+  font-size: 1.1em;
+}
+
+.input-icon-left {
+  left: var(--space-3);
+}
+
+.input-icon-right {
+  right: var(--space-3);
+}
+
+.input-icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.input:focus ~ .input-icon {
+  color: var(--color-primary-500);
+}
+
+/* ═══════════════════════════════════════════════
+   INPUT STATES
+   ═══════════════════════════════════════════════ */
+
+/* Error State */
+.input-wrapper-error .input {
+  border-color: var(--color-danger-main);
+}
+
+.input-wrapper-error .input:focus {
+  border-color: var(--color-danger-main);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.input-wrapper-error .input-icon {
+  color: var(--color-danger-main);
+}
+
+/* Success State */
+.input-wrapper-success .input {
+  border-color: var(--color-success-main);
+}
+
+.input-wrapper-success .input:focus {
+  border-color: var(--color-success-main);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+.input-wrapper-success .input-icon {
+  color: var(--color-success-main);
+}
+
+/* Disabled State */
+.input-wrapper-disabled {
+  opacity: 0.6;
+}
+
+/* ═══════════════════════════════════════════════
+   INPUT MESSAGES
+   ═══════════════════════════════════════════════ */
+
+.input-message {
+  font-size: var(--text-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+}
+
+.input-error-message {
+  color: var(--color-danger-text);
+}
+
+.input-helper-text {
+  color: var(--color-slate-500);
+}
+
+/* ═══════════════════════════════════════════════
+   TEXTAREA
+   ═══════════════════════════════════════════════ */
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: var(--leading-relaxed);
+  padding: var(--space-3);
+}
+
+.textarea::-webkit-resizer {
+  background: var(--color-slate-200);
+  border-radius: var(--radius-sm);
+}
+
+/* ═══════════════════════════════════════════════
+   INPUT SIZES
+   ═══════════════════════════════════════════════ */
+
+.input-sm {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  min-height: 32px;
+}
+
+.input-lg {
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--text-lg);
+  min-height: 48px;
+}
+
+/* ═══════════════════════════════════════════════
+   INPUT VARIANTS
+   ═══════════════════════════════════════════════ */
+
+/* Filled Variant */
+.input-filled {
+  background: var(--color-slate-50);
+  border: 1px solid transparent;
+}
+
+.input-filled:hover {
+  background: var(--color-slate-100);
+}
+
+.input-filled:focus {
+  background: var(--bg-surface);
+  border-color: var(--color-primary-500);
+}
+
+/* Search Input */
+.input-search {
+  padding-left: var(--space-10);
+  background: var(--color-slate-50);
+  border: 1px solid transparent;
+}
+
+.input-search:focus {
+  background: var(--bg-surface);
+  border-color: var(--color-primary-500);
+}
+
+/* ═══════════════════════════════════════════════
+   SELECT
+   ═══════════════════════════════════════════════ */
+
+.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right var(--space-3) center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: var(--space-10);
+  cursor: pointer;
+}
+
+.select:focus {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2314b8a6' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+}
+
+/* ═══════════════════════════════════════════════
+   CHECKBOX & RADIO
+   ═══════════════════════════════════════════════ */
+
+.checkbox-group,
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+}
+
+.checkbox,
+.radio {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--color-primary-500);
+}
+
+.checkbox-label,
+.radio-label {
+  font-size: var(--text-base);
+  color: var(--color-slate-700);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ═══════════════════════════════════════════════
+   FORM GRID
+   ═══════════════════════════════════════════════ */
+
+.form-grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.form-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.form-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+  .form-grid-2,
+  .form-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   INPUT ADDON
+   ═══════════════════════════════════════════════ */
+
+.input-addon-group {
+  display: flex;
+  width: 100%;
+}
+
+.input-addon {
+  display: flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-slate-50);
+  border: 1px solid var(--color-slate-200);
+  color: var(--color-slate-600);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  white-space: nowrap;
+}
+
+.input-addon-left {
+  border-right: none;
+  border-top-left-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-lg);
+}
+
+.input-addon-right {
+  border-left: none;
+  border-top-right-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+}
+
+.input-addon-group .input {
+  border-radius: 0;
+}
+
+.input-addon-group .input:first-child {
+  border-top-left-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-lg);
+}
+
+.input-addon-group .input:last-child {
+  border-top-right-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+}

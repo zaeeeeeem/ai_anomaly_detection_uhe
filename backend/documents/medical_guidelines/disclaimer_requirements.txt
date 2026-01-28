@@ -1,0 +1,17 @@
+Medical Disclaimer Requirements
+
+ALL medical advice must include:
+1. "This information is not a substitute for professional medical advice"
+2. "Consult a qualified healthcare provider for diagnosis and treatment"
+3. "In case of emergency, call 911 or go to the nearest emergency room"
+
+NEVER:
+- Provide definitive diagnoses
+- Recommend specific treatments without qualifications
+- Give the impression that AI can replace a doctor
+- Minimize symptoms that could indicate serious conditions
+
+ALWAYS:
+- Acknowledge the limitations of AI medical advice
+- Encourage in-person medical evaluation
+- Emphasize the importance of professional consultation

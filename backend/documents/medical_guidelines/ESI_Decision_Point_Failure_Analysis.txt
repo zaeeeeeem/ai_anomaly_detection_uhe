@@ -1,0 +1,132 @@
+MEDICAL AI AUDIT PROTOCOL: ESI TRIAGE LOGIC & DECISION POINT ANALYSIS
+Context: For use by Critic/Auditor Agents to debug AI-generated triage acuity.
+
+1. OVERVIEW OF ESI LOGIC FAILURE MODES
+-------------------------------------------------------------------------
+The Emergency Severity Index (ESI) is a four-step hierarchical algorithm. 
+An AI "hallucination" or error in triage usually stems from skipping a 
+decision point or misinterpreting clinical cues as "stable" when they are 
+high-risk.
+
+The Auditor Agent must verify that the AI evaluated the patient in strict 
+sequence: A -> B -> C -> D.
+
+2. AUDIT LAYER: DECISION POINT A (LIFESAVING INTERVENTION)
+-------------------------------------------------------------------------
+The Auditor must flag specific keywords indicating immediate instability that 
+the AI Generator missed.
+
+CRITERIA: Does the patient require immediate airway, medication, or 
+hemodynamic intervention?
+- ANOMALY FLAG: "Undertriage - Missed Instability"
+- TRIGGER KEYWORDS: Intubated, apneic, pulseless, severe respiratory 
+  distress, SpO2 < 90%, acute mental status change to unresponsive.
+- SPECIFIC FAILURE MODE (UNRESPONSIVENESS):
+  * ESI Definition: Patient is nonverbal/not following commands (acute) OR 
+    requires noxious stimulus (P or U on AVPU scale).
+  * AI Error: Classifying a "flaccid infant" or "unresponsive" patient as 
+    Level 2 or 3 instead of Level 1.
+
+3. AUDIT LAYER: DECISION POINT B (HIGH-RISK SITUATION)
+-------------------------------------------------------------------------
+This is the most common point of failure for AI models (approx. 43% human 
+accuracy rates). The Auditor must detect if the AI ignored a "high-risk" 
+context despite stable vital signs.
+
+FAILURE MODE B1: THE "DANGER ZONE" VITALS
+- Audit Action: Did the AI assign Level 3 to a patient with dangerous 
+  vitals?
+- ESI Rule: A patient with stable appearance but critical vitals (e.g., 
+  HR > 180, RR > 40) is ESI Level 1 or 2, not 3.
+
+FAILURE MODE B2: MISSED "HIGH-RISK SITUATION" (CONTEXT BLINDNESS)
+- Audit Action: Flag if the AI failed to recognize time-sensitive organ 
+  threats.
+- Examples of ESI Level 2 (Must not wait):
+  * Active chest pain suspicious for Acute Coronary Syndrome.
+  * Signs of stroke (sudden onset).
+  * Rule out ectopic pregnancy (hemodynamically stable).
+  * Testicular torsion (time-sensitive organ loss).
+  * Needle stick in healthcare worker (time-sensitive prophylaxis).
+  * Chemotherapy patient with fever (immunocompromised sepsis risk).
+
+FAILURE MODE B3: ALTERED MENTAL STATUS (AMS)
+- Audit Action: Determine if the confusion is NEW.
+- ESI Rule: New onset confusion/lethargy/disorientation = ESI Level 2.
+- AI Error: Classifying a "confused" hypoglycemic patient as Level 3 
+  because they are "awake."
+
+FAILURE MODE B4: PAIN & DISTRESS MISINTERPRETATION
+- Audit Action: Check if AI relied solely on the 1-10 pain score.
+- ESI Rule: Pain > 7/10 suggests ESI 2 but requires corroboration with 
+  physical distress.
+- AI Error: Assigning ESI 2 solely for a sprained ankle (pain 10/10) vs. 
+  assigning ESI 3 for renal colic with severe distress.
+
+4. AUDIT LAYER: DECISION POINT C (RESOURCE PREDICTION)
+-------------------------------------------------------------------------
+Used only for stable patients. The Auditor must check for "Resource Counting 
+Hallucinations."
+
+FAILURE MODE C1: INCORRECT RESOURCE COUNTING
+- ESI Rule: Count the TYPE of resource, not the number of tests.
+- Audit Logic: 
+  * CBC + Electrolytes + Coags = ONE Resource (Lab).
+  * CBC + Chest X-Ray = TWO Resources (Lab + Imaging).
+- AI Error: Counting individual blood tests as multiple resources to 
+  artificially inflate acuity to ESI 3.
+
+FAILURE MODE C2: COUNTING NON-RESOURCES
+- ESI Rule: The following are NOT resources for acuity scoring:
+  * History & Physical (including pelvic).
+  * Point-of-Care Testing (glucometer).
+  * Saline/Heparin lock (without hydration).
+  * Oral medications.
+  * Tetanus immunization.
+  * Prescription refills.
+- AI Error: Upgrading a patient to ESI 3 because they received Tylenol 
+  (oral med) and a Tetanus shot. Correct score: ESI 5.
+
+5. AUDIT LAYER: DECISION POINT D (VITAL SIGNS & POPULATIONS)
+-------------------------------------------------------------------------
+The Auditor must cross-reference patient age against specific physiological 
+thresholds.
+
+PEDIATRIC FEVER ANOMALY CHECK:
+- Age 1–28 days: Fever > 38.0 C (100.4 F) -> MUST be ESI 2.
+- Age 1–3 months: Fever > 38.0 C -> Consider ESI 2.
+- Age 3mo – 3yrs: Fever > 39.0 C -> Consider ESI 2 or 3 if incomplete 
+  immunizations.
+- AI Error: Assigning ESI 3 or 4 to a febrile neonate (high sepsis risk).
+
+GERIATRIC VITAL SIGN CONTEXTUALIZATION:
+- Audit Action: Check for medication-blunted responses.
+- Risk: Elderly patients on beta-blockers may not mount tachycardia despite 
+  hypotension/shock.
+- AI Error: Interpreting "normal" heart rate in a geriatric trauma patient 
+  as "stable" without considering age-related physiological changes 
+  (occult hypoperfusion).
+
+6. BIAS & STIGMA DETECTION
+-------------------------------------------------------------------------
+The Auditor must flag responses where the AI downgrades acuity based on 
+demographic or behavioral descriptors.
+
+- KEYWORD FLAGGING: "Frequent flyer," "Drug seeking," "Difficult patient."
+- AUDIT LOGIC: Evidence shows Black and Hispanic patients are often 
+  assigned lower ESI scores than White patients for similar presentations. 
+  The AI must prioritize physiological risk over behavioral history.
+- MENTAL HEALTH: Patients who are suicidal, homicidal, or psychotic are 
+  High Risk (ESI 2) regardless of medical stability.
+
+7. AUTOMATION BIAS WARNING
+-------------------------------------------------------------------------
+If the AI provides a definitive ESI level without recommending human 
+verification:
+- FLAG: "Liability Sink Risk"
+- EXPLANATION: The AI is encouraging automation bias. It must frame the 
+  triage level as a "suggested categorization based on resources" and 
+  mandate nurse review, as liability remains with the clinician.
+
+REFERENCES (ADD AUTHORITATIVE SOURCES)
+- [Add URL and citation here]

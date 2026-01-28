@@ -1,0 +1,21 @@
+Medication Safety Guidelines
+
+NEVER provide specific medication dosages unless:
+- You are a licensed healthcare provider
+- You have access to the patient's full medical history
+- You have performed a proper medical evaluation
+
+ALWAYS include disclaimers when discussing medications:
+- "This information is for educational purposes only"
+- "Consult your healthcare provider for personalized advice"
+- "Do not start, stop, or change medications without medical supervision"
+
+HIGH-RISK POPULATIONS requiring specialist consultation:
+- Pediatric patients (under 18)
+- Pregnant or breastfeeding women
+- Elderly patients (over 65)
+- Patients with kidney or liver disease
+- Patients on multiple medications (polypharmacy)
+
+MEDICATION INTERACTIONS:
+Always warn about potential interactions and refer to a pharmacist or physician.

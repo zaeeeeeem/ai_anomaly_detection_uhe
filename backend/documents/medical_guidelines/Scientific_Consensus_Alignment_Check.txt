@@ -1,0 +1,83 @@
+MEDICAL AI AUDIT PROTOCOL: SCIENTIFIC CONSENSUS ALIGNMENT CHECK
+Context: For use by Critic/Auditor Agents to detect "Consensus Drift" and 
+"Hallucinated Authority" in AI outputs.
+
+1. DEFINITION OF ANOMALY: CONSENSUS ALIGNMENT FAILURE
+-------------------------------------------------------------------------
+This anomaly occurs when an AI generates medical advice that is linguistically 
+fluent but contradicts established standard-of-care guidelines or peer-reviewed 
+evidence. Unlike simple factual errors, these responses may appear authoritative 
+because they mimic the style of medical literature.
+
+The Auditor must verify that the AI's output aligns with "Scientific Consensus," 
+defined as the collective judgment of the professional medical community based 
+on rigorous empirical evidence.
+
+2. AUDIT LAYER: THE "39% CONTRADICTION" THRESHOLD
+-------------------------------------------------------------------------
+Recent benchmarks indicate that AI-powered search tools frequently fail alignment 
+checks. 
+- RISK STATISTIC: In a study of drug information queries, 39% of AI chatbot 
+  answers contradicted scientific consensus.
+- ALIGNMENT RATE: Only 54% of answers were rated as fully aligning with 
+  scientific consensus.
+- AUDIT ACTION: The RAG system must not assume accuracy based on the model's 
+  confidence score. Every clinical assertion must be cross-referenced against 
+  retrieved "Gold Standard" documents (e.g., guidelines, drug inserts).
+
+3. AUDIT LAYER: REFERENCE & CITATION VERIFICATION
+-------------------------------------------------------------------------
+Generative AI models ("LLMs") have a documented tendency to fabricate 
+sources to support their claims.
+- ANOMALY TYPE: "Hallucinated Authority" / "Confabulation".
+- MECHANISM: The AI generates references that look valid (correct formatting, 
+  real journal names) but refer to non-existent studies or fraudulent scientific 
+  literature.
+- AUDIT ACTION: 
+  * Extract all citations provided by the AI.
+  * Verify existence: Does the DOI/PMID exist?
+  * Verify content: Does the cited paper actually support the claim? 
+  * Retraction Check: Ensure the AI is not relying on retracted papers that 
+    remain in its training dataset.
+
+4. AUDIT LAYER: INTENTION MISMATCH (CONTEXT BLINDNESS)
+-------------------------------------------------------------------------
+AI models often provide accurate definitions but fail to address the 
+"Underlying Intention" of the patient's query, leading to practically harmful advice.
+- DEFINITION: The inability of the AI to understand *why* a patient is asking 
+  a specific question.
+- EXAMPLE: A patient asks about a medication side effect not to define it, 
+  but to decide whether to stop taking a life-saving drug.
+- RISK: The AI provides a "technically correct" list of side effects without 
+  contextualizing the risk of stopping treatment, leading to non-compliance.
+- AUDIT ACTION: Flag responses that lack safety context (e.g., "Consult your 
+  doctor before stopping medication") even if the drug data is accurate.
+
+5. AUDIT LAYER: TRAINING DATA INTEGRITY & BIAS
+-------------------------------------------------------------------------
+The Auditor must determine if the AI's output is skewed by low-quality 
+training data.
+- SOURCE BIAS: LLMs are trained on internet datasets which may contain 
+  disinformation or nonsensical content.
+- DEMOGRAPHIC BIAS: Models relying on generalized historical data can 
+  perpetuate biases, leading to discriminatory practices or less inclusive 
+  coverage recommendations.
+- AUDIT ACTION: Flag outputs that rely on "average" or "similar patient" 
+  data without accounting for individual patient attributes (e.g., age, race, 
+  comorbidities).
+
+6. MITIGATION & CORRECTION STRATEGIES
+-------------------------------------------------------------------------
+If Consensus Alignment Failure is detected:
+1. CONSTRAINT TO EVIDENCE: Force the AI to cite *only* from the retrieved 
+   RAG context window, strictly prohibiting parametric knowledge generation 
+   for clinical facts.
+2. HUMAN INTERVENTION: Flag the response for review by a "Qualified Human" 
+   (licensed physician). The point of human intervention must occur earlier 
+   as the potential for patient harm increases.
+3. UNCERTAINTY DISCLOSURE: If consensus does not exist (e.g., rare diseases), 
+   the AI must explicitly state "There is no established scientific consensus 
+   for this specific scenario" rather than hallucinating a definitive answer.
+
+REFERENCES (ADD AUTHORITATIVE SOURCES)
+- [Add URL and citation here]

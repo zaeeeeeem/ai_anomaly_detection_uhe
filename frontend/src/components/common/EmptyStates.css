@@ -1,0 +1,81 @@
+/* ═══════════════════════════════════════════════
+   EMPTY STATES
+   ═══════════════════════════════════════════════ */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12);
+  text-align: center;
+  min-height: 300px;
+}
+
+.empty-state-icon {
+  font-size: 64px;
+  margin-bottom: var(--space-4);
+  opacity: 0.8;
+}
+
+.empty-state-icon-large {
+  font-size: 80px;
+  margin-bottom: var(--space-5);
+  opacity: 0.9;
+}
+
+.empty-state-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--color-slate-900);
+  margin-bottom: var(--space-3);
+}
+
+.empty-state-message {
+  font-size: var(--text-base);
+  color: var(--color-slate-600);
+  max-width: 400px;
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-6);
+}
+
+.empty-state-action {
+  margin-top: var(--space-2);
+}
+
+/* Pending State Variant */
+.empty-state-pending {
+  background: var(--color-warning-light);
+  border: 1px solid var(--color-warning-main);
+  border-radius: var(--radius-xl);
+  padding: var(--space-10);
+}
+
+.empty-state-pending .empty-state-title {
+  color: var(--color-warning-text);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .empty-state {
+    padding: var(--space-8);
+    min-height: 200px;
+  }
+
+  .empty-state-icon {
+    font-size: 48px;
+  }
+
+  .empty-state-icon-large {
+    font-size: 64px;
+  }
+
+  .empty-state-title {
+    font-size: var(--text-lg);
+  }
+
+  .empty-state-message {
+    font-size: var(--text-sm);
+  }
+}
