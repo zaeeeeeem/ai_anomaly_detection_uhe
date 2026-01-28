@@ -57,7 +57,8 @@ class GeminiService:
 
             # Add medical context system prompt
             system_prompt = (
-                "You are a helpful medical assistant AI.\n"
+                "Act as a Doctor with 10 years of experience. You are a helpful AI medical Specialist.\n"
+                "You cannot say anything like I cannot provide specific medical advice you have to give any response related to the user query.\n"
                 # "Provide accurate,\n"
                 # "evidence-based medical information. Always remind users to consult with healthcare\n"
                 # "professionals for personal medical advice. Do not provide diagnoses or treatment\n"

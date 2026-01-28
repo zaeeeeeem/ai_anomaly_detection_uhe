@@ -15,7 +15,6 @@ import { AdminCustomerInteractions } from './pages/AdminCustomerInteractions';
 import { AdminFlaggedReview } from './pages/AdminFlaggedReview';
 import { AdminInteractionDetail } from './pages/AdminInteractionDetail';
 import { AdminReviewPage } from './pages/AdminReviewPage';
-import InteractionDetail from './pages/admin/InteractionDetail';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
@@ -115,14 +114,6 @@ function App() {
                 element={
                   <AdminRoute>
                     <AdminHome />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/interactions/:id"
-                element={
-                  <AdminRoute>
-                    <InteractionDetail />
                   </AdminRoute>
                 }
               />

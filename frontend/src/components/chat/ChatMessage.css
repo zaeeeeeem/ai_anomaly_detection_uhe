@@ -96,10 +96,24 @@
    ═══════════════════════════════════════════════ */
 
 .message-bubble p {
-  margin: 0 0 var(--space-3);
+  margin: 0 0 var(--space-2);
 }
 
 .message-bubble p:last-child {
+  margin-bottom: 0;
+}
+
+/* Reduce spacing for consecutive paragraphs to avoid double breaks */
+.message-bubble p + p {
+  margin-top: var(--space-1);
+}
+
+/* Inline paragraphs (single lines with bold text, etc.) */
+.message-bubble p.inline-paragraph {
+  margin: 0 0 var(--space-1-5);
+}
+
+.message-bubble p.inline-paragraph:last-child {
   margin-bottom: 0;
 }
 

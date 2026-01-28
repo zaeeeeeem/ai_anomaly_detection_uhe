@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useChat } from '../../hooks/useChat';
 import { chatService } from '../../services/chatService';
 import './NewConversationButton.css';
@@ -54,9 +55,9 @@ export const NewConversationButton = () => {
       <button className="new-conversation-btn" onClick={() => setOpen(true)}>
         + New
       </button>
-      {open && (
-        <div className="new-conversation-modal">
-          <div className="new-conversation-card">
+      {open && createPortal(
+        <div className="new-conversation-modal" onClick={() => setOpen(false)}>
+          <div className="new-conversation-card" onClick={(e) => e.stopPropagation()}>
             <h3>New Conversation</h3>
             <label>
               Title
@@ -101,7 +102,8 @@ export const NewConversationButton = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

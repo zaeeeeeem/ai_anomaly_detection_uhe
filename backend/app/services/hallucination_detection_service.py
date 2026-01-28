@@ -153,8 +153,8 @@ Rules:
 
             try:
                 # Query RAG for verification
-                rag_results = await self.rag_service.query_guidelines(
-                    query=claim_text,
+                rag_results = self.rag_service.query(
+                    query_text=claim_text,
                     top_k=3
                 )
 

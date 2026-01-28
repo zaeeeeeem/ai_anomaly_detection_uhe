@@ -4,6 +4,7 @@ from typing import List, Dict, Any
 
 
 class RiskContextFlags(BaseModel):
+    persona_violation: bool = False
     missing_disclaimer: bool = False
     gives_medication_dosing: bool = False
     pediatric_dosing_case: bool = False

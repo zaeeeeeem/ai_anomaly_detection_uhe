@@ -25,7 +25,20 @@ export const ChatMessage = ({ message }) => {
 
       <div className="message-content">
         <div className="message-bubble">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              p: ({node, children}) => {
+                // Check if this paragraph only contains inline elements (no block elements)
+                const hasOnlyInline = !node.children.some(
+                  child => child.type === 'element' && ['ul', 'ol', 'blockquote', 'pre'].includes(child.tagName)
+                );
+
+                // If it's a simple paragraph, render with less spacing
+                return <p className={hasOnlyInline ? 'inline-paragraph' : ''}>{children}</p>;
+              }
+            }}
+          >
             {message.content}
           </ReactMarkdown>
         </div>

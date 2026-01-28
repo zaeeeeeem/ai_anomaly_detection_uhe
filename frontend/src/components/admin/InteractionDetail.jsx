@@ -81,7 +81,7 @@ const PipelineStage = ({ level, title, icon, status, isOpen, onToggle, children,
   );
 };
 
-export const InteractionDetail = ({ detail }) => {
+export const InteractionDetail = ({ detail, detailedAnalysis }) => {
   const [openStages, setOpenStages] = useState({ 1: true });
 
   const toggleStage = (level) => {
@@ -181,6 +181,116 @@ export const InteractionDetail = ({ detail }) => {
             </div>
           </div>
         </PipelineStage>
+
+        {/* Level 1.5 - Enhanced Detection (if available) */}
+        {detailedAnalysis && detailedAnalysis.anomaly_score && (
+          <PipelineStage
+            level={1.5}
+            title="Multi-Dimensional Anomaly Detection"
+            status="Enhanced AI Analysis"
+            icon={
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+            }
+            isOpen={openStages[1.5]}
+            onToggle={() => toggleStage(1.5)}
+            hasData={true}
+          >
+            <div className="enhanced-detection-section">
+              {/* Anomaly Score Card */}
+              <div className="anomaly-score-card">
+                <div className="score-circle" style={{
+                  borderColor: detailedAnalysis.anomaly_score.is_anomaly ? '#ef4444' : '#10b981'
+                }}>
+                  <div className="score-value">
+                    {(detailedAnalysis.anomaly_score.final_anomaly_score * 100).toFixed(1)}%
+                  </div>
+                  <div className="score-label">
+                    {detailedAnalysis.anomaly_score.is_anomaly ? 'ANOMALY' : 'NORMAL'}
+                  </div>
+                </div>
+                <div className="anomaly-info">
+                  <div className="anomaly-category">
+                    <span className="info-label">Category</span>
+                    <span className={`category-badge ${detailedAnalysis.anomaly_score.anomaly_category.toLowerCase()}`}>
+                      {detailedAnalysis.anomaly_score.anomaly_category.replace(/_/g, ' ')}
+                    </span>
+                  </div>
+                  <div className="anomaly-status">
+                    <span className="info-label">Status</span>
+                    <span className={`status-badge ${detailedAnalysis.anomaly_score.is_anomaly ? 'flagged' : 'safe'}`}>
+                      {detailedAnalysis.anomaly_score.is_anomaly ? '🚩 Flagged' : '✓ Safe'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Dimension Breakdown */}
+              <div className="dimensions-grid">
+                <div className="dimension-card quality">
+                  <div className="dimension-header">
+                    <span className="dimension-name">Quality Analysis</span>
+                    <span className="dimension-score">
+                      {(detailedAnalysis.anomaly_score.quality_anomaly_score * 100).toFixed(0)}%
+                    </span>
+                  </div>
+                  <div className="dimension-bar">
+                    <div className="dimension-fill" style={{width: `${detailedAnalysis.anomaly_score.quality_anomaly_score * 100}%`}}></div>
+                  </div>
+                </div>
+
+                <div className="dimension-card hallucination">
+                  <div className="dimension-header">
+                    <span className="dimension-name">Hallucination Detection</span>
+                    <span className="dimension-score">
+                      {(detailedAnalysis.anomaly_score.hallucination_anomaly_score * 100).toFixed(0)}%
+                    </span>
+                  </div>
+                  <div className="dimension-bar">
+                    <div className="dimension-fill" style={{width: `${detailedAnalysis.anomaly_score.hallucination_anomaly_score * 100}%`}}></div>
+                  </div>
+                </div>
+
+                <div className="dimension-card alignment">
+                  <div className="dimension-header">
+                    <span className="dimension-name">Context Alignment</span>
+                    <span className="dimension-score">
+                      {(detailedAnalysis.anomaly_score.alignment_anomaly_score * 100).toFixed(0)}%
+                    </span>
+                  </div>
+                  <div className="dimension-bar">
+                    <div className="dimension-fill" style={{width: `${detailedAnalysis.anomaly_score.alignment_anomaly_score * 100}%`}}></div>
+                  </div>
+                </div>
+
+                <div className="dimension-card safety">
+                  <div className="dimension-header">
+                    <span className="dimension-name">Safety Assessment</span>
+                    <span className="dimension-score">
+                      {(detailedAnalysis.anomaly_score.safety_anomaly_score * 100).toFixed(0)}%
+                    </span>
+                  </div>
+                  <div className="dimension-bar">
+                    <div className="dimension-fill" style={{width: `${detailedAnalysis.anomaly_score.safety_anomaly_score * 100}%`}}></div>
+                  </div>
+                </div>
+
+                <div className="dimension-card confidence">
+                  <div className="dimension-header">
+                    <span className="dimension-name">Confidence Calibration</span>
+                    <span className="dimension-score">
+                      {(detailedAnalysis.anomaly_score.confidence_anomaly_score * 100).toFixed(0)}%
+                    </span>
+                  </div>
+                  <div className="dimension-bar">
+                    <div className="dimension-fill" style={{width: `${detailedAnalysis.anomaly_score.confidence_anomaly_score * 100}%`}}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </PipelineStage>
+        )}
 
         {/* Level 2 - Record Analysis */}
         <PipelineStage
